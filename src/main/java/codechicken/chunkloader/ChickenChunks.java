@@ -13,8 +13,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 @Mod(
-    modid = Tags.MODID,
-    name = Tags.MODNAME,
+    modid = "ChickenChunks",
+    name = "ChickenChunks",
     version = Tags.VERSION,
     dependencies = "after:CodeChickenCore",
     acceptedMinecraftVersions = CodeChickenCorePlugin.mcVersion)
@@ -29,7 +29,7 @@ public class ChickenChunks {
 
     public static BlockChunkLoader blockChunkLoader;
 
-    @Instance(value = Tags.MODID)
+    @Instance(value = "ChickenChunks")
     public static ChickenChunks instance;
 
     @EventHandler
