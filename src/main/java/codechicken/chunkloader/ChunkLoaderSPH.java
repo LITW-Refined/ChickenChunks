@@ -3,6 +3,7 @@ package codechicken.chunkloader;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.INetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 import codechicken.core.ServerUtils;
@@ -38,8 +39,10 @@ public class ChunkLoaderSPH implements IServerPacketHandler {
     }
 
     private void handleChunkLoaderOwnerPackage(EntityPlayerMP sender, PacketCustom packet) {
-        if (ChunkLoaderManager.opInteract() && !ServerUtils.isPlayerOP(sender.getCommandSenderName())) {
-            return; // Ignore, op can change owner only, if op-interact is enabled
+        if (!ServerUtils.isPlayerOP(sender.getCommandSenderName())) {
+            sender.playerNetServerHandler.playerEntity
+                .addChatMessage(new ChatComponentText("You don't have permissions to do change the owner!"));
+            return;
         }
         TileEntity tile = sender.worldObj.getTileEntity(packet.readInt(), packet.readInt(), packet.readInt());
         if (tile instanceof TileChunkLoader) {
