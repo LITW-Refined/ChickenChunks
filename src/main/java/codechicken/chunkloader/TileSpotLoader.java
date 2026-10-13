@@ -18,7 +18,8 @@ public class TileSpotLoader extends TileChunkLoaderBase {
         int y = packet.readInt();
         int z = packet.readInt();
         if (!world.blockExists(x, y, z)) {
-            world.getChunkProvider().loadChunk(x >> 4, z >> 4);
+            world.getChunkProvider()
+                .loadChunk(x >> 4, z >> 4);
         }
         TileEntity tile = world.getTileEntity(x, y, z);
         if (tile instanceof TileSpotLoader) {
