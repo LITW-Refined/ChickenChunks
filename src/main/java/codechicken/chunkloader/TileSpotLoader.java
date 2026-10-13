@@ -14,7 +14,13 @@ import codechicken.lib.packet.PacketCustom;
 public class TileSpotLoader extends TileChunkLoaderBase {
 
     public static void handleDescriptionPacket(PacketCustom packet, World world) {
-        TileEntity tile = world.getTileEntity(packet.readInt(), packet.readInt(), packet.readInt());
+        int x = packet.readInt();
+        int y = packet.readInt();
+        int z = packet.readInt();
+        if (!world.blockExists(x, y, z)) {
+            world.getChunkProvider().loadChunk(x >> 4, z >> 4);
+        }
+        TileEntity tile = world.getTileEntity(x, y, z);
         if (tile instanceof TileSpotLoader) {
             TileSpotLoader ctile = (TileSpotLoader) tile;
             ctile.active = packet.readBoolean();
